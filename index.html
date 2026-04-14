@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="100% Organic, Chemical-Free Devgad Hapus Mangoes. Grass-Ripened, Farm-Fresh, Direct to Your Doorstep.">
+    <meta name="keywords" content="organic mangoes, devgad hapus, natural mangoes, chemical-free fruit">
+    <title>Unnati Organic - Premium Organic Mangoes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #0f5d2f;
+            --primary-yellow: #ffc107;
+            --primary-orange: #ff9800;
+            --secondary-green: #059669;
+            --light-bg: #fffbeb;
+            --white: #ffffff;
+            --dark-text: #1f2937;
+            --gray-600: #4b5563;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(to bottom, #fef3c7, #ffffff, #f0fdf4);
+            color: var(--dark-text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
+        }
+
+        @keyframes bounce-custom {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-float { animation: float 8s ease-in-out infinite; }
+        .animate-bounce { animation: bounce-custom 2s infinite; }
+        .animate-fade-in { animation: fadeIn 1s ease-out; }
+        .animate-slide-in { animation: slideInUp 0.6s ease-out; }
+        .animate-spin { animation: spin 1.5s linear infinite; }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .loading-spinner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 4px solid #fef3c7;
+            border-top-color: var(--primary-yellow);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+
+        .loading-spinner::after {
+            content: '';
+            position: absolute;
+            inset: 12px;
+            border: 4px solid #f0fdf4;
+            border-bottom-color: var(--primary-green);
+            border-radius: 50%;
+            animation: spin 2s linear infinite reverse;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: var(--transition);
+            background: transparent;
+            padding: 1rem 2rem;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-btn {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        @media (max-width: 640px) {
+            .header-btn { display: none; }
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 40;
+            background: linear-gradient(135deg, #25d366, #20ba5f);
+            color: var(--white);
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            animation: bounce-custom 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+        }
+
+        @media (max-width: 640px) {
+            .whatsapp-float {
+                bottom: 1rem;
+                right: 1rem;
+                width: 3rem;
+                height: 3rem;
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 2rem;
+            margin-top: -80px;
+            padding-top: 120px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero-blob1 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-yellow), var(--primary-orange));
+            border-radius: 50%;
+            filter: blur(80px);
+            top: 10%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-blob2 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #86efac, #2dd4bf);
+            border-radius: 50%;
+            filter: blur(80px);
+            bottom: 10%;
+            right: 10%;
+            animation: float 10s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .hero-mango {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary-yellow), var(--primary-orange), #d97706);
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.2));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 56rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            background: rgba(15, 93, 47, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(15, 93, 47, 0.2);
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 3.75rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title-gradient {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-buttons {
+                flex-direction: row;
+            }
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(15, 93, 47, 0.05);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--primary-green);
+            animation: bounce-custom 2s infinite;
+            z-index: 10;
+            font-size: 1.5rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .section {
+            padding: 4rem 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .section {
+                padding: 6rem 1rem;
+            }
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: clamp(1.875rem, 5vw, 2.25rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray-600);
+            max-width: 42rem;
+            margin: 0 auto 3rem;
+            font-size: 1.0625rem;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, #f0fdf4, #ffffff);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(15, 93, 47, 0.1);
+            border-radius: 1.5rem;
+            transition: var(--transition);
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        .about-card:hover {
+            transform: translateY(-0.5rem);
+            border-color: rgba(15, 93, 47, 0.3);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark-text);
+        }
+
+        .about-card p {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            background: linear-gradient(135deg, #f0fdf4, #fef3c7);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .why-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .why-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .why-icon {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, rgba(15, 93, 47, 0.1), rgba(255, 193, 7, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+        }
+
+        .why-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark-text);
+        }
+
+        .why-card p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        /* Products Section */
+        .products {
+            background: linear-gradient(135deg, #ffffff, #fef3c7);
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            background: var(--white);
+            position: relative;
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        .card:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card.featured {
+            border: 2px solid var(--primary-yellow);
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-image-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-yellow), var(--primary-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            background: linear-gradient(135deg, var(--primary-yellow), var(--primary-orange));
+            color: var(--dark-text);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark-text);
+        }
+
+        .card p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+
+        .card .btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            border: none;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .card .btn:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: linear-gradient(135deg, #ffffff, #f0fdf4);
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .gallery-item {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            height: 250px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-yellow), var(--primary-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: linear-gradient(135deg, #fef3c7, #ffffff);
+        }
+
+        .testimonial-container {
+            max-width: 48rem;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            padding: 2rem;
+            border-left: 4px solid var(--primary-green);
+            min-height: 20rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 768px) {
+            .testimonial-container {
+                padding: 3rem;
+            }
+        }
+
+        .testimonial-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-avatar {
+            font-size: 2.5rem;
+        }
+
+        .testimonial-info h4 {
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            color: var(--primary-yellow);
+            font-size: 1.25rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.0625rem;
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: #e5e7eb;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--primary-green);
+            width: 2rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .cta-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+
+        .cta-btn {
+            background: var(--white);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .cta-btn:hover {
+            background: #f9fafb;
+        }
+
+        .cta-note {
+            font-size: 0.875rem;
+            opacity: 0.85;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: var(--white);
+            padding: 3rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p {
+            color: #d1d5db;
+            line-height: 1.6;
+            font-size: 0.9375rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 2rem 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9375rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-green);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0d4a24;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="header-content">
+            <div class="logo">Unnati Organic 🥭</div>
+            <button class="header-btn" onclick="openWhatsApp()">
+                💬 Order Now
+            </button>
+        </div>
+    </header>
+
+    <!-- Floating WhatsApp Button -->
+    <button class="whatsapp-float" onclick="openWhatsApp()" title="Order on WhatsApp">💬</button>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-blob1"></div>
+            <div class="hero-blob2"></div>
+            <div class="hero-mango"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-badge">🥭 Devgad Hapus Organic Mangoes</div>
+
+            <h1 class="hero-title">
+                100% Organic &
+                <br>
+                <span class="hero-title-gradient">Chemical-Free Mangoes</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Grass-ripened, pesticide-free mangoes from our certified organic farm. Fresh from the orchard directly to your doorstep within 24 hours.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="openWhatsApp()">
+                    💬 Order on WhatsApp →
+                </button>
+                <button class="btn btn-secondary" onclick="scrollTo('products')">
+                    View Products
+                </button>
+            </div>
+        </div>
+
+        <div class="scroll-indicator animate-bounce">↓</div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">☀️</div>
+                    <h3>Grass-Ripened</h3>
+                    <p>No artificial ripening agents or chemicals. Natural ripening using sunlight and time-tested methods for superior taste.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">🧪</div>
+                    <h3>100% Chemical-Free</h3>
+                    <p>Zero pesticides, zero fertilizers, zero preservatives. Pure organic farming practices following international standards.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">🚚</div>
+                    <h3>Farm Direct</h3>
+                    <p>No middlemen, no warehouses. Picked fresh and shipped directly from our certified organic farm to you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section why-choose">
+        <div class="container">
+            <h2 class="section-title">Why Choose Unnati Organic?</h2>
+
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">🌱</div>
+                    <h3>100% Certified Organic</h3>
+                    <p>Certified by international organic standards. No chemical residues or synthetic inputs.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">⚡</div>
+                    <h3>Farm to Home</h3>
+                    <p>Direct from our farm to your table. Minimal handling ensures freshness and nutritional value.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">💧</div>
+                    <h3>Naturally Ripened</h3>
+                    <p>Ripened on trees under natural sunlight. No ethylene gas or artificial accelerants used.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">⭐</div>
+                    <h3>Freshness Guaranteed</h3>
+                    <p>Delivered within 24 hours of harvest using temperature-controlled packaging.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section products" id="products">
+        <div class="container">
+            <h2 class="section-title">Choose Your Package</h2>
+            <p class="section-subtitle">Select the perfect amount for your family. All packages include freshness guarantee and careful packaging.</p>
+
+            <div class="products-container">
+                <!-- Product 1 -->
+                <div class="card">
+                    <div class="card-image-placeholder">
+                        <img src="images/mango1.jpg" alt="Classic Dozen" style="display:none;">
+                        🥭
+                    </div>
+                    <div class="card-content">
+                        <h3>Classic Dozen</h3>
+                        <p>₹1800 - 12 Mangoes</p>
+                        <button class="btn" onclick="order()">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="card featured">
+                    <div class="card-badge">Most Popular</div>
+                    <div class="card-image-placeholder">
+                        <img src="images/mango2.jpg" alt="Premium Pack" style="display:none;">
+                        🥭
+                    </div>
+                    <div class="card-content">
+                        <h3>Premium Pack</h3>
+                        <p>₹2100 - 15 Mangoes</p>
+                        <button class="btn" onclick="order()">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="card featured">
+                    <div class="card-badge">Best Value</div>
+                    <div class="card-image-placeholder">
+                        <img src="images/mango3.jpg" alt="Family Pack" style="display:none;">
+                        🥭
+                    </div>
+                    <div class="card-content">
+                        <h3>Family Pack</h3>
+                        <p>₹2300 - 10 Mangoes</p>
+                        <button class="btn" onclick="order()">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery">
+        <div class="container">
+            <h2 class="section-title">Our Harvest</h2>
+
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="images/mango1.jpg" alt="Mango 1" style="display:none;">
+                    <div class="gallery-item-placeholder">🥭</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/mango2.jpg" alt="Mango 2" style="display:none;">
+                    <div class="gallery-item-placeholder">🥭</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/mango3.jpg" alt="Mango 3" style="display:none;">
+                    <div class="gallery-item-placeholder">🥭</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/mango4.jpg" alt="Mango 4" style="display:none;">
+                    <div class="gallery-item-placeholder">🥭</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/mango5.jpg" alt="Mango 5" style="display:none;">
+                    <div class="gallery-item-placeholder">🥭</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/mango6.jpg" alt="Mango 6" style="display:none;">
+                    <div class="gallery-item-placeholder">🥭</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/mango7.jpg" alt="Mango 7" style="display:none;">
+                    <div class="gallery-item-placeholder">🥭</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/mango8.jpg" alt="Mango 8" style="display:none;">
+                    <div class="gallery-item-placeholder">🥭</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">Customer Reviews</h2>
+
+            <div class="testimonial-container" id="testimonialContainer">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Order Today</h2>
+                <p>Fresh, organic Devgad mangoes delivered to your doorstep within 24 hours.</p>
+
+                <div class="cta-buttons">
+                    <!-- <a href="https://wa.me/919763867577" target="_blank" class="cta-btn">
+                        💬 +91 99266 79903
+                    </a> -->
+                    <a href="https://wa.me/919921992007" target="_blank" class="cta-btn">
+                        💬 +91 99219 92007
+                    </a>
+                    <a href="https://wa.me/919763867577" target="_blank" class="cta-btn">
+                        💬 +91 9763867577
+                    </a>
+                </div>
+
+                <p class="cta-note">Any questions? Message any of our numbers for assistance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Unnati Organic</h3>
+                    <p>Premium, chemical-free, organic Devgad mangoes delivered fresh to your home.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>📞 +91 9763867577</p>
+                    <p>📞 +91 9921992007</p>
+                   
+                </div>
+
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>Located in Pune wagholi, Maharashtra. We practice certified organic farming to bring you the healthiest, most delicious mangoes.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025-26 Unnati Organic. All rights reserved. 100% Organic, 100% Delicious, 100% Fresh.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data
+        const testimonials = [
+            {
+                name: 'Sarah Johnson',
+                role: 'Health Enthusiast, Mumbai',
+                text: 'Finally found truly organic mangoes! The taste is incredible and no weird chemical smell. My family loves them!',
+                rating: 5,
+                emoji: '👩‍🦰'
+            },
+            {
+                name: 'Raj Kumar',
+                role: 'Businessman, Delhi',
+                text: 'Been ordering for two years now. The quality never disappoints. Fresh, sweet, and delivered right on time every time.',
+                rating: 5,
+                emoji: '👨‍💼'
+            },
+            {
+                name: 'Priya Sharma',
+                role: 'Fitness Coach, Pune',
+                text: 'As a health-conscious person, I only buy organic. These mangoes are pure, fresh, and taste exactly how mangoes should taste!',
+                rating: 5,
+                emoji: '👩‍🦱'
+            },
+            {
+                name: 'Vikram Singh',
+                role: 'Chef, Bangalore',
+                text: 'Use these mangoes in my restaurant. Customers always comment on the exceptional quality and flavor. Highly recommended!',
+                rating: 5,
+                emoji: '👨‍🍳'
+            }
+        ];
+
+        let currentTestimonial = 0;
+
+        // Functions
+        function order() {
+            openWhatsApp();
+        }
+
+        function openWhatsApp() {
+            const message = encodeURIComponent('Hi! I would like to order organic mangoes from Unnati Organic.');
+            window.open(`https://wa.me/919921992007?text=${message}`, '_blank');
+        }
+
+        function scrollTo(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function renderTestimonial(index) {
+            const t = testimonials[index];
+            const stars = Array(t.rating).fill('⭐').join('');
+            return `
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">${t.emoji}</div>
+                    <div class="testimonial-info">
+                        <h4>${t.name}</h4>
+                        <p>${t.role}</p>
+                    </div>
+                </div>
+                <div class="testimonial-stars">${stars}</div>
+                <p class="testimonial-text">"${t.text}"</p>
+                <div class="testimonial-dots">
+                    ${testimonials.map((_, i) => `
+                        <div class="dot ${i === index ? 'active' : ''}" onclick="showTestimonial(${i})"></div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function showTestimonial(index) {
+            currentTestimonial = index;
+            document.getElementById('testimonialContainer').innerHTML = renderTestimonial(index);
+        }
+
+        function autoRotateTestimonials() {
+            setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+        }
+
+        // Load images
+        function loadProductImages() {
+            const productCards = document.querySelectorAll('.card');
+            productCards.forEach((card, index) => {
+                const img = card.querySelector('img');
+                if (img && img.src) {
+                    const placeholder = card.querySelector('.card-image-placeholder');
+                    if (placeholder) {
+                        const newImg = img.cloneNode();
+                        newImg.style.display = 'block';
+                        placeholder.innerHTML = '';
+                        placeholder.appendChild(newImg);
+                    }
+                }
+            });
+        }
+
+        function loadGalleryImages() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach((item) => {
+                const img = item.querySelector('img');
+                if (img && img.src) {
+                    const placeholder = item.querySelector('.gallery-item-placeholder');
+                    if (placeholder) {
+                        const newImg = img.cloneNode();
+                        newImg.style.display = 'block';
+                        placeholder.innerHTML = '';
+                        placeholder.appendChild(newImg);
+                    }
+                }
+            });
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hide loading screen
+            setTimeout(() => {
+                const loading = document.getElementById('loadingScreen');
+                loading.classList.add('hidden');
+                
+                // Load images
+                loadProductImages();
+                loadGalleryImages();
+            }, 1500);
+
+            // Show first testimonial
+            showTestimonial(0);
+            autoRotateTestimonials();
+        });
+    </script>
+</body>
+</html>
